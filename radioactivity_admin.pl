@@ -1869,6 +1869,9 @@ sub annual_report {
     $isotope->{LIQUID_TRANSFER_TOTAL} = $total_liquid_transfer;
     $isotope->{LIQUID_DISPOSAL_TOTAL} = $total_liquid_disposal;
 
+    # Skip isotopes which have nothing to report
+    next unless ($total_solid_transfer + $total_liquid_transfer + $total_liquid_disposal > 0);
+
     push @{$isotope_classes{$emission}}, $isotope;
 
   }
