@@ -50,6 +50,7 @@
       <th>% limit</th>
 
     </tr>
+    <!-- TMPL_IF NAME=RECORDS -->
     <!-- TMPL_LOOP NAME=RECORDS -->
     <tr>
       <td><!-- TMPL_VAR NAME=ISOTOPE --></td>
@@ -64,6 +65,9 @@
       <td<!-- TMPL_IF NAME=WARN_HOLDING --> class="warning"<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=PERCENT_HOLDING --></td>
     </tr>
     <!-- /TMPL_LOOP -->
+    <!-- TMPL_ELSE -->
+    <td colspan=10 class="center">No records to show</td>
+    <!-- /TMPL_IF -->
 
   </table>
 

@@ -1752,7 +1752,7 @@ sub monthly_report {
 
 
   # Step through all isotopes working out holdings and incoming/outgoing data
-  my $records;
+  my $records = [];
 
   my $isotopes_sth = $dbh->prepare ("SELECT isotope_id,element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit FROM Isotope ORDER BY mw");
 
@@ -1800,6 +1800,9 @@ sub monthly_report {
     if ($record->{PERCENT_LIQUID} > 100 or $record->{PERCENT_LIQUID}<-1){
       $record->{WARN_LIQUID}=1;
     }
+
+    # Don't show lines with no data in them
+    next unless ($current_activity + $total_incoming + $total_solid_transfer + $total_liquid_transfer + $total_liquid_disposal > 0);
 
     push @$records, $record;
   }
