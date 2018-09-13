@@ -1,0 +1,76 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+<!-- TMPL_INCLUDE NAME="toolbar.html" -->
+
+<div class="main">
+  <h2 class="center">Monthly Radioactivity Report</h2>
+
+  <form method="GET">
+    <input type="hidden" name="action" value="Monthly Report">
+  <table>
+    <tr>
+      <th>Show records for</th>
+      <td>
+	<select name="month" onChange="this.form.submit()">
+	  <!-- TMPL_LOOP NAME=MONTHS -->
+	  <option value="<!-- TMPL_VAR NAME=MONTH_NO -->" <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=MONTH_NAME --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+
+	<select name="year" onChange="this.form.submit()">
+	  <!-- TMPL_LOOP NAME=YEARS -->
+	  <option <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=YEAR --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+      </td>
+  </table>
+  <script language="Javascript" type="text/javascript">
+    // Just to test if javascript is enabled
+  </script>
+  <noscript>
+    <p class="center"><input type="submit" value="Update"></p>
+  </noscript>
+</form>
+  <table>
+    <tr>
+      <th rowspan="2">Isotope</th>
+      <th rowspan="2">Incoming</th>
+      <th colspan="2">Solid Transfers</th>
+      <th colspan="2">Liquid Transfers</th>
+      <th colspan="2">Liquid Disposals</th>
+      <th colspan="2">Holding</th>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <th>% limit</th>
+      <th>Total</th>
+      <th>% limit</th>
+      <th>Total</th>
+      <th>% limit</th>
+      <th>Total</th>
+      <th>% limit</th>
+
+    </tr>
+    <!-- TMPL_LOOP NAME=RECORDS -->
+    <tr>
+      <td><!-- TMPL_VAR NAME=ISOTOPE --></td>
+      <td><!-- TMPL_VAR NAME=TOTAL_INCOMING --></td>
+      <td><!-- TMPL_VAR NAME=TOTAL_SOLID_TRANSFER --></td>
+      <td<!-- TMPL_IF NAME=WARN_SOLID_TRANSFER --> class="warning"<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=PERCENT_SOLID_TRANSFER --></td>
+      <td><!-- TMPL_VAR NAME=TOTAL_LIQUID_TRANSFER --></td>
+      <td<!-- TMPL_IF NAME=WARN_LIQUID_TRANSFER --> class="warning"<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=PERCENT_LIQUID_TRANSFER --></td>
+      <td><!-- TMPL_VAR NAME=TOTAL_LIQUID --></td>
+      <td<!-- TMPL_IF NAME=WARN_LIQUID --> class="warning"<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=PERCENT_LIQUID --></td>
+      <td><!-- TMPL_VAR NAME=TOTAL_HOLDING --></td>
+      <td<!-- TMPL_IF NAME=WARN_HOLDING --> class="warning"<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=PERCENT_HOLDING --></td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+
+  </table>
+
+  <p class="center">
+    Activities shown in brackets are calculated degraded values for the month end.
+  </p>
+
+</div>
+  </body> 
+</html>

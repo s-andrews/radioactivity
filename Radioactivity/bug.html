@@ -1,0 +1,32 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+    <div class="error">
+      <h1>Oops - Something went wrong</h1>
+
+      <p class="error">
+        <!-- TMPL_IF NAME=MESSAGE --><!-- TMPL_VAR NAME=MESSAGE -->
+        <!-- TMPL_ELSE -->Fatal error: can't continue.<!-- /TMPL_IF -->
+      </p>
+
+      <p>
+	There was a serious problem when trying to process your 
+	request from which the system cannot recover.  During
+	normal operation of this system you should never
+	see this message so something's gone wrong. Sorry about that.
+      </p>
+
+      <p>
+	Please report this to Simon Andrews (x6463), and he'll do his
+	best to fix it.
+      </p>
+
+      <p>
+	In the mean time here's a picture of some puppies, so the
+	world doesn't seem such a bad place after all...
+      </p>
+
+      <p>
+	<img src="/images/puppies.jpg">
+      </p>
+    </div>
+  </body> 
+</html>

@@ -1,0 +1,83 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+<!-- TMPL_INCLUDE NAME="toolbar.html" -->
+
+<div class="main">
+  <h2 class="center">Radioactivity Usage</h2>
+
+  <form method="GET">
+    <input type="hidden" name="action" value="Usage Report">
+  <table>
+    <tr>
+      <th>Show</th>
+      <td>
+	<select name="m">
+	  <!-- TMPL_LOOP NAME=MEASURES -->
+	  <option value="<!-- TMPL_VAR NAME=VALUE -->" <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=NAME --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+	<select name="t">
+	  <!-- TMPL_LOOP NAME=TYPES -->
+	  <option value="<!-- TMPL_VAR NAME=VALUE -->" <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=NAME --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+      </td>
+      <th>From</th>
+      <td>
+	<select name="fm">
+	  <!-- TMPL_LOOP NAME=FROM_MONTHS -->
+	  <option value="<!-- TMPL_VAR NAME=MONTH_NO -->" <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=MONTH --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+
+	<select name="fy">
+	  <!-- TMPL_LOOP NAME=FROM_YEARS -->
+	  <option <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=YEAR --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+      </td>
+      <th>To</th>
+      <td>
+	<select name="tm">
+	  <!-- TMPL_LOOP NAME=TO_MONTHS -->
+	  <option value="<!-- TMPL_VAR NAME=MONTH_NO -->" <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=MONTH --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+
+	<select name="ty">
+	  <!-- TMPL_LOOP NAME=TO_YEARS -->
+	  <option <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=YEAR --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+      </td>
+      <th>Isotopes</th>
+      <td>
+	<select name="i" size="3"  multiple="multiple">
+	  <!-- TMPL_LOOP NAME=ISOTOPES -->
+	  <option value="<!-- TMPL_VAR NAME=ID -->" <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=MW --> <!-- TMPL_VAR NAME=ELEMENT --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+      </td>
+    </tr>
+
+  </table>
+  <p class="center"><input type="submit" value="Create Graph"></p>
+</form>
+
+  <!-- TMPL_IF NAME=GRAPH -->
+  <p class="center">
+    <img width="640" height="480" src="radioactivity_admin.pl?action=graph&fm=<!-- TMPL_VAR NAME=FROM_MONTH -->&fy=<!-- TMPL_VAR NAME=FROM_YEAR -->&tm=<!-- TMPL_VAR NAME=TO_MONTH -->&ty=<!-- TMPL_VAR NAME=TO_YEAR -->&t=<!-- TMPL_VAR NAME=TYPE -->&m=<!-- TMPL_VAR NAME=MEASURE --><!-- TMPL_LOOP NAME=ISOTOPE_IDS -->&i=<!-- TMPL_VAR NAME=ID --><!-- /TMPL_LOOP -->">
+  </p>
+  <p class="center">
+    Data is calculated for the last day of each month shown.
+  </p>
+
+  <!-- TMPL_ELSE -->
+
+  <p class="center">
+    Select the dates and isotopes you wish to plot from the choices above.
+  </p>
+  <!-- /TMPL_IF -->
+
+</div>
+  </body> 
+</html>

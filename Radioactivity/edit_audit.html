@@ -1,0 +1,70 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+    <h2 class="center">Edit Audit Record</h2>
+    <form method="POST">
+      <input type="hidden" name="action" value="finish_edit_audit">
+      <input type="hidden" name="id" value="<!-- TMPL_VAR NAME=ID -->">
+      <table>
+	<tr>
+	  <th>Building</th>
+	  <td>
+	    <select name="building">
+	      <!-- TMPL_LOOP NAME=BUILDINGS -->
+	      <option value = "<!-- TMPL_VAR NAME=ID -->" <!-- TMPL_IF NAME=SELECTED --> selected <!-- /TMPL_IF -->><!-- TMPL_VAR NAME=NUMBER --><!-- TMPL_IF NAME=NAME--> (<!-- TMPL_VAR NAME=NAME -->)<!-- /TMPL_IF --></option>
+	      <!-- /TMPL_LOOP -->
+	    </select>
+	  </td>
+	</tr>
+
+	<tr>
+	  <th>Isotope</th>
+	  <td>
+	    <select name="isotope">
+	      <!-- TMPL_LOOP NAME=ISOTOPES -->
+	      <option value = "<!-- TMPL_VAR NAME=ID -->" <!-- TMPL_IF NAME=SELECTED --> selected <!-- /TMPL_IF -->><!-- TMPL_VAR NAME=MW --> <!-- TMPL_VAR NAME=ELEMENT --></option>
+	      <!-- /TMPL_LOOP -->
+	    </select>
+	  </td>
+	</tr>
+
+	<tr>
+	  <th>Activity (MBq)</th>
+	  <td><input type="text" size="20" name="activity" value="<!-- TMPL_VAR NAME=ACTIVITY -->"></td>
+	</tr>
+	<tr>
+	  <th>Date</th>
+	  <td>
+	    <table>
+	      <tr>
+		<td><input type="radio" name="date_type" value="today"></td>
+		<td>today</td>
+	      </tr>
+	      <tr>
+		<td><input type="radio" name="date_type" value="other" checked></td>
+		<td>
+		  <select name="day">
+		    <!-- TMPL_LOOP NAME=DAYS -->
+		    <option <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=DAY --></option>
+		    <!-- /TMPL_LOOP -->
+		  </select>
+		  <select name="month">
+		    <!-- TMPL_LOOP NAME=MONTHS -->
+		    <option value="<!-- TMPL_VAR NAME=MONTH_NO -->" <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=MONTH --></option>
+		    <!-- /TMPL_LOOP -->
+		  </select>
+		  <select name="year">
+		    <!-- TMPL_LOOP NAME=YEARS -->
+		    <option <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=YEAR --></option>
+		    <!-- /TMPL_LOOP -->
+		  </select>
+		</td>
+	      </tr>
+	    </table>
+	  </td>
+	</tr>
+
+      </table>
+
+      <p class="center"><input type="submit" value="Update Audit Record"></p>
+    </form>
+  </body> 
+</html>

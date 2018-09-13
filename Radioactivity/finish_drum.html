@@ -1,0 +1,26 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+<!-- TMPL_INCLUDE NAME="toolbar.html" -->
+    <h2 class="center">New Drum Created</h2>
+
+    <p class="center">
+      A new drum has been added to the system.  The
+      assigned code for this entry is:
+    </p>
+
+    <p class="important">
+      DRUM<!-- TMPL_VAR NAME=ID -->
+    </p>
+
+    <p class="center">
+      Please label the drum with this code to assist
+      in any future sitewide audit of radioactive material.
+    </p>
+
+    <form method="GET">
+      <p class="center">
+	<input type="hidden" name="action" value="drums">
+	<input type="submit" value="Return to drum list">
+      </p>
+    </form>
+  </body> 
+</html>

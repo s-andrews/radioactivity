@@ -1,0 +1,79 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+    <h2 class="center">Register a Radioactive Solid Waste Disposal</h2>
+    <form method="POST">
+      <input type="hidden" name="action" value="finish_solid">
+      <table>
+	<tr>
+	  <th>Username</th>
+	  <td><input type="text" size="20" name="username"></td>
+	</tr>
+	
+	<tr>
+	  <th>Password</th>
+	  <td><input type="password" size="20" name="password"></td>
+	</tr>
+
+	<tr>
+	  <th>Building</th>
+	  <td>
+	    <select name="building">
+	      <!-- TMPL_LOOP NAME=BUILDINGS -->
+	      <option value = "<!-- TMPL_VAR NAME=ID -->"><!-- TMPL_VAR NAME=NUMBER --><!-- TMPL_IF NAME=NAME--> (<!-- TMPL_VAR NAME=NAME -->)<!-- /TMPL_IF --></option>
+	      <!-- /TMPL_LOOP -->
+	    </select>
+	  </td>
+	</tr>
+
+	<tr>
+	  <th>Isotope</th>
+	  <td>
+	    <select name="isotope">
+	      <!-- TMPL_LOOP NAME=ISOTOPES -->
+	      <option value = "<!-- TMPL_VAR NAME=ID -->"><!-- TMPL_VAR NAME=MW --> <!-- TMPL_VAR NAME=ELEMENT --></option>
+	      <!-- /TMPL_LOOP -->
+	    </select>
+	  </td>
+	</tr>
+
+	<tr>
+	  <th>Disposal Drum Used</th>
+	  <td>
+	    <select name="drum">
+	      <!-- TMPL_LOOP NAME=DRUMS -->
+	      <option value="<!-- TMPL_VAR NAME=ID -->">DRUM<!-- TMPL_VAR NAME=ID --></option>
+	      <!-- /TMPL_LOOP -->
+	    </select>
+	  </td>
+	</tr>
+
+	<tr>
+	  <th>Activity (MBq)</th>
+	  <td><input type="text" size="20" name="activity"></td>
+	</tr>
+	<tr>
+	  <th>Date</th>
+	  <td>
+	    <select name="day">
+	      <!-- TMPL_LOOP NAME=DAYS -->
+	      <option <!-- TMPL_IF NAME=SELECTED --> selected <!-- /TMPL_IF -->><!-- TMPL_VAR NAME=DAY --></option>
+	      <!-- /TMPL_LOOP -->
+	    </select>
+	    <select name="month">
+	      <!-- TMPL_LOOP NAME=MONTHS -->
+	      <option value="<!-- TMPL_VAR NAME=MONTH_NO -->"<!-- TMPL_IF NAME=SELECTED --> selected <!-- /TMPL_IF -->><!-- TMPL_VAR NAME=MONTH --></option>
+	      <!-- /TMPL_LOOP -->
+	    </select>
+	    <select name="year">
+	      <!-- TMPL_LOOP NAME=YEARS -->
+	      <option<!-- TMPL_IF NAME=SELECTED --> selected <!-- /TMPL_IF -->><!-- TMPL_VAR NAME=YEAR --></option>
+	      <!-- /TMPL_LOOP -->
+	    </select>
+	  </td>
+	</tr>
+
+      </table>
+
+      <p class="center"><input type="submit" value="Register Radioactive Waste Disposal"></p>
+    </form>
+  </body> 
+</html>

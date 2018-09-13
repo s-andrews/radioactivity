@@ -1,0 +1,151 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+<!-- TMPL_INCLUDE NAME="toolbar.html" -->
+
+<div class="main">
+  <h2 class="center">Solid Waste Disposal Drums</h2>
+
+  <form method="GET">
+    <input type="hidden" name="action" value="new_drum">
+    <input type="hidden" name="type" value="solid">
+    <p class="center">
+      <input type="submit" value="Create new solid waste drum">
+    </p>
+  </form>
+
+  <form method="GET">
+    <input type="hidden" name="action" value="new_drum">
+    <input type="hidden" name="type" value="liquid">
+    <p class="center">
+      <input type="submit" value="Create new liquid waste drum">
+    </p>
+  </form>
+
+
+  <h3 class="center">Active Drums</h3>
+  <table>
+    <tr>
+      <th>Drum Code</th>
+      <th>Material Type</th>
+      <th>Created</th>
+      <th>Activity (MBq)</th>
+      <th>Details</th>
+      <th>Collected</th>
+    </tr>
+    <!-- TMPL_IF NAME=ACTIVE_DRUMS -->
+    <!-- TMPL_LOOP NAME=ACTIVE_DRUMS -->
+    <tr>
+      <td>DRUM<!-- TMPL_VAR NAME=ID --></td>
+      <td><!-- TMPL_VAR NAME=MATERIAL --></td>
+      <td><!-- TMPL_VAR NAME=CREATED --></td>
+      <td><!-- TMPL_VAR NAME=ACTIVITY --></td>
+      <td>
+	<form method="POST">
+	  <input type="hidden" name="action" value="show_drum">
+	  <input type="hidden" name="id" value="<!-- TMPL_VAR NAME=ID -->">
+	  <input type="hidden" name="month" value="<!-- TMPL_VAR NAME=MONTH -->">
+	  <input type="hidden" name="year" value="<!-- TMPL_VAR NAME=YEAR -->">
+	  <input type="submit" value="Details">
+	</form>
+      </td>
+      <td>
+	<form method="POST">
+	  <input type="hidden" name="action" value="drum_collected">
+	  <input type="hidden" name="id" value="<!-- TMPL_VAR NAME=ID -->">
+	  <input type="hidden" name="month" value="<!-- TMPL_VAR NAME=MONTH -->">
+	  <input type="hidden" name="year" value="<!-- TMPL_VAR NAME=YEAR -->">
+	  <input type="submit" value="Collected">
+	  <select name="collected_day">
+	    <!-- TMPL_LOOP NAME=DAYS -->
+	    <option <!-- TMPL_IF NAME=SELECTED --> selected <!-- /TMPL_IF -->><!-- TMPL_VAR NAME=DAY --></option>
+	    <!-- /TMPL_LOOP -->
+	  </select>
+	  <select name="collected_month">
+	    <!-- TMPL_LOOP NAME=MONTHS -->
+	    <option value="<!-- TMPL_VAR NAME=MONTH_NO -->"<!-- TMPL_IF NAME=SELECTED --> selected <!-- /TMPL_IF -->><!-- TMPL_VAR NAME=MONTH --></option>
+	    <!-- /TMPL_LOOP -->
+	  </select>
+	  <select name="collected_year">
+	    <!-- TMPL_LOOP NAME=YEARS -->
+	    <option<!-- TMPL_IF NAME=SELECTED --> selected <!-- /TMPL_IF -->><!-- TMPL_VAR NAME=YEAR --></option>
+	    <!-- /TMPL_LOOP -->
+	  </select>
+	</form>
+      </td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+    <!-- TMPL_ELSE -->
+    <tr>
+      <td colspan="5" class="center">There are no records to show</td>
+    </tr>
+    <!-- /TMPL_IF -->
+  </table>
+
+
+  <h3 class="center">Collected Drums</h3>
+  <form method="GET">
+    <input type="hidden" name="action" value="drums">
+  <table>
+    <tr>
+      <th>Show drums collected in</th>
+      <td>
+	<select name="month" onChange="this.form.submit()">
+	  <!-- TMPL_LOOP NAME=MONTHS -->
+	  <option value="<!-- TMPL_VAR NAME=MONTH_NO -->" <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=MONTH_NAME --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+
+	<select name="year" onChange="this.form.submit()">
+	  <!-- TMPL_LOOP NAME=YEARS -->
+	  <option <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=YEAR --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+      </td>
+  </table>
+  <script language="Javascript" type="text/javascript">
+    // Just to test if javascript is enabled
+  </script>
+  <noscript>
+    <p class="center"><input type="submit" value="Update"></p>
+  </noscript>
+</form>
+
+  
+  <table>
+    <tr>
+      <th>Drum Code</th>
+      <th>Material</th>
+      <th>Created</th>
+      <th>Collected</th>
+      <th>Activity</th>
+      <th>Details</th>
+    </tr>
+    <!-- TMPL_IF NAME=COLLECTED_DRUMS -->
+    <!-- TMPL_LOOP NAME=COLLECTED_DRUMS -->
+    <tr>
+      <td>DRUM<!-- TMPL_VAR NAME=ID --></td>
+      <td><!-- TMPL_VAR NAME=MATERIAL --></td>
+      <td><!-- TMPL_VAR NAME=CREATED --></td>
+      <td><!-- TMPL_VAR NAME=COLLECTED --></td>
+      <td><!-- TMPL_VAR NAME=ACTIVITY --></td>
+      <td>
+	<form method="POST">
+	  <input type="hidden" name="action" value="show_drum">
+	  <input type="hidden" name="id" value="<!-- TMPL_VAR NAME=ID -->">
+	  <input type="hidden" name="month" value="<!-- TMPL_VAR NAME=MONTH -->">
+	  <input type="hidden" name="year" value="<!-- TMPL_VAR NAME=YEAR -->">
+	  <input type="submit" value="Details">
+	</form>
+      </td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+    <!-- TMPL_ELSE -->
+    <tr>
+      <td colspan="6" class="center">There are no records to show</td>
+    </tr>
+    <!-- /TMPL_IF -->
+  </table>
+
+
+</div>
+  </body> 
+</html>

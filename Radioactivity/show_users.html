@@ -1,0 +1,55 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+<!-- TMPL_INCLUDE NAME="toolbar.html" -->
+
+<div class="main">
+  <h2 class="center">List of Users</h2>
+
+  <form method="GET">
+    <input type="hidden" name="action" value="list_new_users">
+    <p class="center"><input type="submit" name="not_submit" value="Add new user"></p>
+  </form>
+
+  <table>
+    <tr>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Active</th>
+      <th>Edit</th>
+    </tr>
+
+    <!-- TMPL_IF NAME=USERS -->
+    <!-- TMPL_LOOP NAME=USERS -->
+    <tr>
+      <td><!-- TMPL_VAR NAME=LAST_NAME --></td>
+      <td><!-- TMPL_VAR NAME=FIRST_NAME --></td>
+      <td><!-- TMPL_VAR NAME=PHONE --></td>
+      <td><!-- TMPL_VAR NAME=EMAIL --></td>
+      <td><!-- TMPL_IF NAME=ACTIVE -->Yes<!-- TMPL_ELSE -->No<!-- /TMPL_IF --></td>
+      <td>
+	<form methd="GET">
+	  <input type="hidden" name="action" value="start_edit_user">
+	  <input type="hidden" name="id" value="<!-- TMPL_VAR NAME=ID -->">
+	  <input type="submit" value="Edit">
+	</form>
+      </td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+    <!-- TMPL_ELSE -->
+    <tr>
+      <td colspan="5" class="center">There are no records to show</td>
+    </tr>
+    <!-- /TMPL_IF -->
+
+  </table>
+
+  <p class="center">
+    <!-- TMPL_LOOP NAME=CATEGORIES -->
+    <a href="radioactivity_admin.pl?action=users&offset=<!-- TMPL_VAR NAME=OFFSET -->">[<!-- TMPL_VAR NAME=START --> - <!-- TMPL_VAR NAME=END -->]</a> 
+    <!-- /TMPL_LOOP -->
+  </p>
+
+</div>
+  </body> 
+</html>

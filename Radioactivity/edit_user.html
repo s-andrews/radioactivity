@@ -1,0 +1,42 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+    <h2 class="center">Edit User Details</h2>
+    <form method="POST">
+      <input type="hidden" name="action" value="finish_edit_user">
+      <input type="hidden" name="id" value="<!-- TMPL_VAR NAME=ID -->">
+      <table>
+	<tr>
+	  <th>First Name</th>
+	  <td>
+	      <input type="text" name="first_name" value="<!-- TMPL_VAR NAME=FIRST_NAME -->">
+	  </td>
+	</tr>
+	<tr>
+	  <th>Last Name</th>
+	  <td>
+	      <input type="text" name="last_name" value="<!-- TMPL_VAR NAME=LAST_NAME -->">
+	  </td>
+	</tr>
+	<tr>
+	  <th>Phone</th>
+	  <td>
+	      <input type="text" name="phone" value="<!-- TMPL_VAR NAME=PHONE -->">
+	  </td>
+	</tr>
+	<tr>
+	  <th>Email</th>
+	  <td>
+	      <input type="text" name="email" value="<!-- TMPL_VAR NAME=EMAIL -->">
+	  </td>
+	</tr>	
+	<tr>
+	  <th>Active</th>
+	  <td>
+	      <input type="checkbox" name="active" <!-- TMPL_IF NAME=ACTIVE -->checked<!-- /TMPL_IF -->>
+	  </td>
+	</tr>
+      </table>
+
+      <p class="center"><input type="submit" value="Update User Details"></p>
+    </form>
+  </body> 
+</html>

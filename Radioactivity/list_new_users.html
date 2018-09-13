@@ -1,0 +1,33 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+<!-- TMPL_INCLUDE NAME="toolbar.html" -->
+
+<div class="main">
+  <h2 class="center">Add New User</h2>
+
+  <p class="center">Fill in the form below to add a new user</p>
+
+  <form method="POST">
+  <input type="hidden" name="action" value="list_new_users">
+  <table>
+    <tr>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Username</th>
+      <th>Email</th>
+    </tr>
+
+    <tr>
+      <td><input type="text" name="last_name" value="<!-- TMPL_VAR NAME=LAST_NAME -->"</td>
+      <td><input type="text" name="first_name" value="<!-- TMPL_VAR NAME=FIRST_NAME -->"</td>
+      <td><input type="text" name="username" value="<!-- TMPL_VAR NAME=USERNAME -->"</td>
+      <td><input type="text" name="email" value="<!-- TMPL_VAR NAME=EMAIL -->"</td>
+    </tr>
+  </table>
+
+  <p class="center">
+    <input type="submit" name="submit" value="Add User">
+  </p>
+  </form>    
+</div>
+  </body> 
+</html>

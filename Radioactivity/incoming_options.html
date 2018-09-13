@@ -1,0 +1,108 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+<!-- TMPL_INCLUDE NAME="toolbar.html" -->
+
+<div class="main">
+  <h2 class="center">Incoming Radioactivity</h2>
+
+  <form method="GET">
+    <input type="hidden" name="action" value="start_incoming">
+    <p class="center">
+      <input type="submit" value="Register new incoming radioactivity">
+    </p>
+  </form>
+
+  <form method="GET">
+    <input type="hidden" name="action" value="incoming">
+  <table>
+    <tr>
+      <th>Show records for</th>
+      <td>
+	<select name="month" onChange="this.form.submit()">
+	  <!-- TMPL_LOOP NAME=MONTHS -->
+	  <option value="<!-- TMPL_VAR NAME=MONTH_NO -->" <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=MONTH_NAME --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+
+	<select name="year" onChange="this.form.submit()">
+	  <!-- TMPL_LOOP NAME=YEARS -->
+	  <option <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=YEAR --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+      </td>
+      <tr>
+	<th>Order by</th>
+	<td>
+	<select name="order" onChange="this.form.submit()">
+	  <!-- TMPL_LOOP NAME=ORDERS -->
+	  <option <!-- TMPL_IF NAME=SELECTED -->selected<!-- /TMPL_IF -->><!-- TMPL_VAR NAME=ORDER_NAME --></option>
+	  <!-- /TMPL_LOOP -->
+	</select>
+      </tr>
+  </table>
+  <script language="Javascript" type="text/javascript">
+    // Just to test if javascript is enabled
+  </script>
+  <noscript>
+    <p class="center"><input type="submit" value="Update"></p>
+  </noscript>
+</form>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Isotope</th>
+      <th>Activity (MBq)</th>
+      <th>Stock Code</th>
+      <th>Current Activity</th>
+      <th>User</th>
+      <th>Submitter</th>
+      <th>Building</th>
+      <th>Date</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+
+    <!-- TMPL_IF NAME=RECORDS -->
+    <!-- TMPL_LOOP NAME=RECORDS -->
+    <tr>
+      <td>RADIO<!-- TMPL_VAR NAME=ID --></td>
+      <td><!-- TMPL_VAR NAME=ISOTOPE --></td>
+      <td><!-- TMPL_VAR NAME=ORIG_ACTIVITY --></td>
+      <td><!-- TMPL_VAR NAME=STOCK_CODE --></td>
+      <td><!-- TMPL_VAR NAME=CURRENT_ACTIVITY --></td>
+      <td><!-- TMPL_VAR NAME=USER --></td>
+      <td><!-- TMPL_VAR NAME=SUBMITTER --></td>
+      <td><!-- TMPL_VAR NAME=BUILDING --></td>
+      <td><!-- TMPL_VAR NAME=DATE --></td>
+      <td>
+	<form method="POST">
+	  <input type="hidden" name="action" value="edit_incoming">
+	  <input type="hidden" name="id" value="<!-- TMPL_VAR NAME=ID -->">
+	  <input type="hidden" name="month" value="<!-- TMPL_VAR NAME=MONTH -->">
+	  <input type="hidden" name="year" value="<!-- TMPL_VAR NAME=YEAR -->">
+	  <input type="hidden" name="sort" value="<!-- TMPL_VAR NAME=ORDER -->">
+	  <input type="submit" value="Edit">
+	</form>
+      </td>
+      <td>
+	<form method="POST" onSubmit="return confirmAction()">
+	  <input type="hidden" name="action" value="delete_incoming">
+	  <input type="hidden" name="id" value="<!-- TMPL_VAR NAME=ID -->">
+	  <input type="hidden" name="month" value="<!-- TMPL_VAR NAME=MONTH -->">
+	  <input type="hidden" name="year" value="<!-- TMPL_VAR NAME=YEAR -->">
+	  <input type="hidden" name="order" value="<!-- TMPL_VAR NAME=ORDER -->">
+	  <input type="submit" value="Delete">
+	</form>
+      </td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+    <!-- TMPL_ELSE -->
+    <tr>
+      <td colspan="11" class="center">There are no records to show</td>
+    </tr>
+    <!-- /TMPL_IF -->
+
+  </table>
+
+</div>
+  </body> 
+</html>

@@ -1,0 +1,110 @@
+DROP DATABASE IF EXISTS `Radioactivity`;
+CREATE DATABASE Radioactivity;
+USE Radioactivity;
+
+CREATE TABLE Isotope (
+       isotope_id INT AUTO_INCREMENT PRIMARY KEY,
+       element VARCHAR (2),
+       mw INT,
+       half_life FLOAT,
+       site_holding_limit INT,
+       solid_monthly_disposal_limit INT,
+       liquid_monthly_disposal_limit INT,
+       emission_type ENUM("alpha","beta","gamma")
+       );
+
+CREATE TABLE Building (
+       building_id INT AUTO_INCREMENT PRIMARY KEY,
+       number INT,
+       name VARCHAR(100)
+       );
+
+CREATE TABLE Person (
+       person_id INT AUTO_INCREMENT PRIMARY KEY,
+       first_name VARCHAR(50),
+       last_name VARCHAR(50),
+       username VARCHAR(20),
+       email VARCHAR(100),
+       phone VARCHAR(50),
+       active BOOLEAN
+       );
+
+CREATE TABLE Received (
+       received_id INT AUTO_INCREMENT PRIMARY KEY,
+       date DATE,
+       isotope_id INT,
+       person_id INT,
+       input_person_id INT,
+       building_id INT,
+       activity FLOAT,
+       product_code VARCHAR(50),
+       fully_decayed DATE
+       );
+
+CREATE TABLE Transfer_disposal (
+       transfer_waste_id INT AUTO_INCREMENT PRIMARY KEY,
+       date DATE,
+       drum_id INT,
+       isotope_id INT,
+       person_id INT,
+       input_person_id INT,
+       building_id INT,
+       activity FLOAT,
+       fully_decayed DATE
+       );
+
+CREATE TABLE Liquid_disposal (
+       liquid_waste_id INT AUTO_INCREMENT PRIMARY KEY,
+       date DATE,
+       isotope_id INT,
+       person_id INT,
+       input_person_id INT,
+       building_id INT,
+       activity FLOAT,
+       fully_decayed DATE
+       );
+
+CREATE TABLE Drum (
+       drum_id INT AUTO_INCREMENT PRIMARY KEY,
+       date_started DATE,
+       date_removed DATE,
+       material ENUM("solid","liquid")
+       );
+
+
+CREATE TABLE Audit (
+       audit_id INT AUTO_INCREMENT PRIMARY KEY,
+       building_id INT,
+       date DATE,
+       isotope_id INT,
+       activity FLOAT
+       );
+
+
+INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("H",3,4500,10000,370,370,"gamma");
+INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("C",14,2092883,1000,370,370,"gamma");      
+INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("P",32,14.28,1000,370,370,"beta");
+INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("P",33,24.4,1000,370,370,"beta");
+INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("S",35,87.9,2500,370,370,"beta");
+INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("Ca",45,165,1000,370,370,"beta");
+INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("Cr",51,27.8,1000,370,370,"beta");
+INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("I",125,60.2,1000,370,370,"beta");
+
+
+GRANT SELECT,INSERT,UPDATE on Radioactivity.* to cgiadmin@localhost;
+GRANT DELETE on Radioactivity.Received to cgiadmin@localhost;
+GRANT DELETE on Radioactivity.Liquid_disposal to cgiadmin@localhost;
+GRANT DELETE on Radioactivity.Transfer_disposal to cgiadmin@localhost;
+GRANT DELETE on Radioactivity.Audit to cgiadmin@localhost;
+
+GRANT SELECT on Radioactivity.* to cgiuser@localhost;
+GRANT INSERT on Radioactivity.Received to cgiuser@localhost;
+GRANT INSERT on Radioactivity.Liquid_disposal to cgiuser@localhost;
+GRANT INSERT on Radioactivity.Transfer_disposal to cgiuser@localhost;
+GRANT INSERT on Radioactivity.Person to cgiuser@localhost;
+
+ALTER TABLE Received ADD INDEX (date,isotope_id,building_id,fully_decayed);
+ALTER TABLE Person ADD INDEX (username);
+ALTER TABLE Transfer_disposal ADD INDEX (date,isotope_id,drum_id,building_id,fully_decayed);
+ALTER TABLE Liquid_disposal ADD INDEX (date,isotope_id,building_id,fully_decayed);
+ALTER TABLE Audit ADD INDEX (date,isotope_id,building_id);

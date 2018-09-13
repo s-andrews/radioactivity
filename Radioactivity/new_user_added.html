@@ -1,0 +1,15 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+<!-- TMPL_INCLUDE NAME="toolbar.html" -->
+    <h2 class="center">New User Added</h2>
+
+    <h4 class="center"><!-- TMPL_VAR NAME=NAME --> (<!-- TMPL_VAR NAME=USERNAME -->) was added to the system</h4>
+
+
+    <form method="GET">
+      <input type="hidden" name="action" value="users">
+      <p class="center">
+	<input type="submit" value="Return to the user list">
+      </p>
+    </form>
+  </body> 
+</html>

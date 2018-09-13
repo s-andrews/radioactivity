@@ -1,0 +1,94 @@
+<!-- TMPL_INCLUDE NAME="header.html" -->
+<!-- TMPL_INCLUDE NAME="toolbar.html" -->
+
+<div class="main">
+  <h2 class="center">Contents of drum DRUM<!-- TMPL_VAR NAME=ID --></h2>
+
+  <table>
+    <tr>
+      <th>Drum Created</th>
+      <td><!-- TMPL_VAR NAME=CREATED --></td>
+    </tr>
+
+    <tr>
+      <th>Material</th>
+      <td><!-- TMPL_VAR NAME=MATERIAL --></td>
+    </tr>
+    <!-- TMPL_IF NAME=COLLECTED -->
+    <tr>
+      <th>Drum Collected</th>
+      <td><!-- TMPL_VAR NAME=COLLECTED --></td>
+    </tr>
+    <tr>
+      <th>Total Activity at Collection</th> 
+      <td><!-- TMPL_VAR NAME=ACTIVITY --> MBq</td>
+    </tr>
+    <!-- TMPL_ELSE -->
+    <tr>
+      <th>Current Total Activity</th>
+      <td><!-- TMPL_VAR NAME=ACTIVITY --> MBq</td>
+    </tr>
+    <!-- /TMPL_IF -->
+  </table>
+
+  <h2 class="center">Content Summary</h2>
+
+  <table>
+    <tr>
+      <th>Isotope</th>
+      <th>Activity</th>
+    </tr>
+
+    <!-- TMPL_IF NAME=SUMMARY -->
+    <!-- TMPL_LOOP NAME=SUMMARY -->
+    <tr>
+      <td><!-- TMPL_VAR NAME=ISOTOPE --></td>
+      <td><!-- TMPL_VAR NAME=ACTIVITY --></td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+    <!-- TMPL_ELSE -->
+    <tr>
+      <td colspan="2" class="center">There are no records to show</td>
+    </tr>
+    <!-- /TMPL_IF -->
+
+
+  </table>
+
+  <h2 class="center">Content Details</h2>
+  <table>
+    <tr>
+      <th>Isotope</th>
+      <th>Activity (MBq)</th>
+      <th>Submission Date</th>
+      <th>Decayed Activity</th>
+      <th>User</th>
+      <th>Building</th>
+    </tr>
+
+    <!-- TMPL_IF NAME=RECORDS -->
+    <!-- TMPL_LOOP NAME=RECORDS -->
+    <tr>
+      <td><!-- TMPL_VAR NAME=ISOTOPE --></td>
+      <td><!-- TMPL_VAR NAME=ORIG_ACTIVITY --></td>
+      <td><!-- TMPL_VAR NAME=DATE --></td>
+      <td><!-- TMPL_VAR NAME=CURRENT_ACTIVITY --></td>
+      <td><!-- TMPL_VAR NAME=USER --></td>
+      <td><!-- TMPL_VAR NAME=BUILDING --></td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+    <!-- TMPL_ELSE -->
+    <tr>
+      <td colspan="8" class="center">There are no records to show</td>
+    </tr>
+    <!-- /TMPL_IF -->
+
+  </table>
+
+  <p class="center">
+    For collected drums the decayed activity was the activity upon collection.  For active drums it is the current activity.
+  </p>
+
+</div>
+  </body> 
+</html>
