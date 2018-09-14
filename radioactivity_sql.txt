@@ -81,14 +81,14 @@ CREATE TABLE Audit (
        );
 
 
-INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("H",3,4500,10000,370,370,"gamma");
-INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("C",14,2092883,1000,370,370,"gamma");      
-INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("P",32,14.28,1000,370,370,"beta");
-INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("P",33,24.4,1000,370,370,"beta");
-INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("S",35,87.9,2500,370,370,"beta");
-INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("Ca",45,165,1000,370,370,"beta");
-INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("Cr",51,27.8,1000,370,370,"beta");
-INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("I",125,60.2,1000,370,370,"beta");
+#INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("H",3,4500,10000,370,370,"gamma");
+#INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("C",14,2092883,1000,370,370,"gamma");      
+#INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("P",32,14.28,1000,370,370,"beta");
+#INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("P",33,24.4,1000,370,370,"beta");
+#INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("S",35,87.9,2500,370,370,"beta");
+#INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("Ca",45,165,1000,370,370,"beta");
+#INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("Cr",51,27.8,1000,370,370,"beta");
+#INSERT INTO Isotope (element,mw,half_life,site_holding_limit,solid_monthly_disposal_limit,liquid_monthly_disposal_limit,emission_type) VALUES ("I",125,60.2,1000,370,370,"beta");
 
 
 GRANT SELECT,INSERT,UPDATE on Radioactivity.* to cgiadmin@localhost;
