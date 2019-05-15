@@ -3234,6 +3234,13 @@ sub get_decayed_date {
 
   # Calculates how many days are taken to reach 0.01 MBq
 
+  # If we're already at or below 0.01 MBq then don't calculate
+  # backwards
+
+  if ($activity < 0.01) {
+      $activity = 0.01;
+  }
+
   my $days = (-((log(0.01/$activity))*$half_life))/log(2);
 
   $days = int($days) + 1;
