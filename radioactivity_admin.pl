@@ -15,7 +15,7 @@ my @allowed_users = qw (andrewss hadfield brewn);
 
 
 #chdir ("D:/Templates/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
-chdir ("/data/private/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
+chdir ("/var/www/radioactive/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
 
 my $q = CGI -> new();
 
@@ -3325,7 +3325,7 @@ sub check_valid_user {
 
 sub check_user {
   $username = $q -> remote_user();
-  $username = "andrewss";
+  $username = "brewn";
 
   unless ($username) {
     print_bug ("No authorisation when accessing the admin script");
