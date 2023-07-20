@@ -305,10 +305,21 @@ sub drum_display {
 
       }
 
+      my($created_year, $created_month, $created_day) = split("-",$started);
+
+      my $age = int(Delta_Days($created_year, $created_month, $created_day,$current_year,$current_month,$current_day)/7);
+
+      my $age_class = "GREEN";
+      $age_class = "ORANGE" if ($age >=16);
+      $age_class = "RED" if ($age >=20);
+
+
       push @active_drums , {ID => $id,
 			    ACTIVITY => sprintf("%.3f",$total_activity),
 			    MATERIAL => $material,
 			    CREATED => $started,
+			    AGE => $age,
+			    AGE_CLASS => $age_class,
 			    YEARS => get_years("$current_year-$current_month-$current_day"),
 			    MONTHS => get_months("$current_year-$current_month-$current_day"),
 			    DAYS => get_days("$current_year-$current_month-$current_day"),

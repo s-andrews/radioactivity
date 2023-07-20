@@ -152,3 +152,20 @@ td {
   border-width: 1px;
   border-color: #AAAAAA;
 }
+
+
+/* Drums */
+td.GREEN {
+    color: white;
+    background-color: green;
+}
+
+td.ORANGE {
+    color: white;
+    background-color: orange;
+}
+
+td.RED {
+    color: white;
+    background-color: red;
+}
