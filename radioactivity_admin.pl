@@ -14,8 +14,8 @@ use Data::Dumper;
 my @allowed_users = qw (andrewss hadfield brewn);
 
 
-#chdir ("D:/Templates/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
-chdir ("/var/www/radioactive/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
+chdir ("/data/private/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
+#chdir ("/var/www/radioactive/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
 
 my $q = CGI -> new();
 
@@ -121,8 +121,8 @@ sub show_options {
       return;
     }
 
-    $record->{ACTIVITY} = sprintf("%.2f",$current_activity);
-    $record->{USED} = sprintf("%.2f",($current_activity/$site_limit)*100);
+    $record->{ACTIVITY} = sprintf("%.3f",$current_activity);
+    $record->{USED} = sprintf("%.3f",($current_activity/$site_limit)*100);
     if ($record->{USED} > 100 or $record->{USED}<-1) {
       $record->{WARN}=1;
     }
@@ -145,7 +145,7 @@ sub show_options {
     my ($first,$last,$phone) = get_user_details($person_id);
     my ($i_first,$i_last,$i_phone) = get_user_details($input_person_id);
     push @incoming , {ISOTOPE => "$mw $element",
-		      ACTIVITY => $activity,
+		      ACTIVITY => sprintf("%.3f",$activity),
 		      USER => "$first $last",
 		      PHONE => $phone,
 		      SUBMITTER => "$i_first $i_last",
@@ -168,7 +168,7 @@ sub show_options {
     my ($i_first,$i_last,$i_phone) = get_user_details($input_person_id);
 
     push @solid_transfer , {ISOTOPE => "$mw $element",
-		       ACTIVITY => $activity,
+		       ACTIVITY => sprintf("%.3f",$activity),
 		       USER => "$first $last",
 		       PHONE => $phone,
 		       SUBMITTER => "$i_first $i_last",
@@ -190,7 +190,7 @@ sub show_options {
     my ($i_first,$i_last,$i_phone) = get_user_details($input_person_id);
 
     push @liquid_transfer , {ISOTOPE => "$mw $element",
-			     ACTIVITY => $activity,
+			     ACTIVITY => sprintf("%.3f",$activity),
 			     USER => "$first $last",
 			     PHONE => $phone,
 			     SUBMITTER => "$i_first $i_last",
@@ -212,7 +212,7 @@ sub show_options {
     my ($first,$last,$phone) = get_user_details($person_id);
     my ($i_first,$i_last,$i_phone) = get_user_details($input_person_id);
     push @liquid_out , {ISOTOPE => "$mw $element",
-			ACTIVITY => $activity,
+			ACTIVITY => sprintf("%.3f",$activity),
 			USER => "$first $last",
 			PHONE => $phone,
 			SUBMITTER => "$i_first $i_last",
@@ -306,7 +306,7 @@ sub drum_display {
       }
 
       push @active_drums , {ID => $id,
-			    ACTIVITY => sprintf("%.2f",$total_activity),
+			    ACTIVITY => sprintf("%.3f",$total_activity),
 			    MATERIAL => $material,
 			    CREATED => $started,
 			    YEARS => get_years("$current_year-$current_month-$current_day"),
@@ -350,7 +350,7 @@ sub drum_display {
       }
 	push @collected_drums , {ID => $id,
 				 MATERIAL => $material,
-				 ACTIVITY => sprintf("%.2f",$total_activity),
+				 ACTIVITY => sprintf("%.3f",$total_activity),
 				 CREATED => $started,
 				 COLLECTED => $removed,
 				};
@@ -408,7 +408,7 @@ sub show_drum {
 
     push @records , {ISOTOPE => "$mw $element",
 		     ORIG_ACTIVITY => $activity,
-		     CURRENT_ACTIVITY => sprintf("%.2f",$current_activity),
+		     CURRENT_ACTIVITY => sprintf("%.3f",$current_activity),
 		     USER => "$first_name $last_name",
 		     BUILDING => $building,
 		     DATE => $date,
@@ -419,10 +419,10 @@ sub show_drum {
   my @summary;
   foreach my $isotope (sort keys (%summary)) {
     push @summary, {ISOTOPE => $isotope,
-		    ACTIVITY => sprintf("%.2f",$summary{$isotope})};
+		    ACTIVITY => sprintf("%.3f",$summary{$isotope})};
   }
   $template -> param(RECORDS => \@records,
-		     ACTIVITY => sprintf("%.2f",$total_activity),
+		     ACTIVITY => sprintf("%.3f",$total_activity),
 		     SUMMARY => \@summary);
 
   print $template->output();
@@ -607,7 +607,7 @@ sub incoming_display {
       push @records, {ID => $id,
 		      ISOTOPE => "$mw $element",
 		      ORIG_ACTIVITY => $activity,
-		      CURRENT_ACTIVITY => sprintf("%.2f",$current_activity),
+		      CURRENT_ACTIVITY => sprintf("%.3f",$current_activity),
 		      STOCK_CODE => $product_code,
 		      USER => "$first $last",
 		      SUBMITTER => "$i_first $i_last",
@@ -875,7 +875,7 @@ sub outgoing_display {
       push @solid_records, {ID => $id,
 			    ISOTOPE => "$mw $element",
 			    ORIG_ACTIVITY => $activity,
-			    CURRENT_ACTIVITY => sprintf("%.2f",$current_activity),
+			    CURRENT_ACTIVITY => sprintf("%.3f",$current_activity),
 			    DRUM_CODE => $drum_id,
 			    USER => "$first $last",
 			    SUBMITTER => "$i_first $i_last",
@@ -909,7 +909,7 @@ sub outgoing_display {
       push @liquid_transfer_records, {ID => $id,
 				      ISOTOPE => "$mw $element",
 				      ORIG_ACTIVITY => $activity,
-				      CURRENT_ACTIVITY => sprintf("%.2f",$current_activity),
+				      CURRENT_ACTIVITY => sprintf("%.3f",$current_activity),
 				      DRUM_CODE => $drum_id,
 				      USER => "$first $last",
 				      SUBMITTER => "$i_first $i_last",
@@ -949,7 +949,7 @@ sub outgoing_display {
       push @liquid_records, {ID => $id,
 			     ISOTOPE => "$mw $element",
 			     ORIG_ACTIVITY => $activity,
-			     CURRENT_ACTIVITY => sprintf("%.2f",$current_activity),
+			     CURRENT_ACTIVITY => sprintf("%.3f",$current_activity),
 			     USER => "$first $last",
 			     SUBMITTER => "$i_first $i_last",
 			     BUILDING => $building,
@@ -1771,8 +1771,8 @@ sub monthly_report {
       return;
     }
 
-    $record->{TOTAL_HOLDING} = sprintf("%.2f",$current_activity);
-    $record->{PERCENT_HOLDING} = sprintf("%.2f",($current_activity/$site_limit)*100);
+    $record->{TOTAL_HOLDING} = sprintf("%.3f",$current_activity);
+    $record->{PERCENT_HOLDING} = sprintf("%.3f",($current_activity/$site_limit)*100);
     if ($record->{PERCENT_HOLDING} > 100 or $record->{PERCENT_HOLDING}<-1){
       $record->{WARN_HOLDING}=1;
     }
@@ -1783,20 +1783,20 @@ sub monthly_report {
     $record->{TOTAL_INCOMING} = $total_incoming;
 
     $record->{TOTAL_SOLID_TRANSFER} = $total_solid_transfer;
-    $record->{PERCENT_SOLID_TRANSFER} = sprintf("%.2f",($total_solid_transfer/$solid_limit)*100);
+    $record->{PERCENT_SOLID_TRANSFER} = sprintf("%.3f",($total_solid_transfer/$solid_limit)*100);
     if ($record->{PERCENT_SOLID_TRANSFER} > 100 or $record->{PERCENT_SOLID_TRANSFER}<-1){
       $record->{WARN_SOLID_TRANSFER}=1;
     }
 
 
     $record->{TOTAL_LIQUID_TRANSFER} = $total_liquid_transfer;
-    $record->{PERCENT_LIQUID_TRANSFER} = sprintf("%.2f",($total_liquid_transfer/$solid_limit)*100);
+    $record->{PERCENT_LIQUID_TRANSFER} = sprintf("%.3f",($total_liquid_transfer/$solid_limit)*100);
     if ($record->{PERCENT_LIQUID_TRANSFER} > 100 or $record->{PERCENT_LIQUID_TRANSFER}<-1){
       $record->{WARN_LIQUID_TRANSFER}=1;
     }
 
     $record->{TOTAL_LIQUID} = $total_liquid_disposal;
-    $record->{PERCENT_LIQUID} = sprintf("%.2f",($total_liquid_disposal/$liquid_limit)*100);
+    $record->{PERCENT_LIQUID} = sprintf("%.3f",($total_liquid_disposal/$liquid_limit)*100);
     if ($record->{PERCENT_LIQUID} > 100 or $record->{PERCENT_LIQUID}<-1){
       $record->{WARN_LIQUID}=1;
     }
