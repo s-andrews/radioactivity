@@ -14,8 +14,8 @@ use Data::Dumper;
 my @allowed_users = qw (andrewss hadfield brewn);
 
 
-chdir ("/data/private/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
-#chdir ("/var/www/radioactive/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
+#chdir ("/data/private/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
+chdir ("/var/www/radioactive/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
 
 my $q = CGI -> new();
 
