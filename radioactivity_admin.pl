@@ -15,7 +15,7 @@ my @allowed_users = qw (andrewss hadfield brewn);
 
 
 #chdir ("/data/private/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
-chdir ("/var/www/radioactive/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
+chdir ("/srv/www/radioactivity/Radioactivity") or die "Can't move to Radioactivity templates dir: $!";
 
 my $q = CGI -> new();
 
@@ -1979,8 +1979,8 @@ sub usage_report {
 	       {NAME => 'Holdings', VALUE => 'h', SELECTED => 0},
 	       {NAME => 'Incoming', VALUE => 'i', SELECTED => 0},
 	       {NAME => 'Solid Transfer Waste', VALUE => 's', SELECTED => 0},
-	       {NAME => 'Liquid Transfer Waste', VALUE => 'q', SELECTED => 0},
-	       {NAME => 'Liquid Disposal Waste', VALUE => 'l', SELECTED => 0},
+	       {NAME => 'Organic Liquid Transfer Waste', VALUE => 'q', SELECTED => 0},
+	       {NAME => 'Aqueous Liquid Disposal Waste', VALUE => 'l', SELECTED => 0},
 	      );
 
   foreach my $type (@types) {
