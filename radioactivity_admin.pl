@@ -1403,11 +1403,25 @@ sub finish_transfer {
   my ($submitter_id) = check_valid_user($username);
   return unless ($submitter_id);
 
+
+  # If this is the first transfer to a drum then we're going to update
+  # the creation date on the drum to be today
+  my ($existing_count) = $dbh-> selectrow_array("SELECT count(*) FROM Transfer_disposal WHERE drum_id=?",undef,($drum_id));
+
   # Finally we can create the new entry
   $dbh->do("INSERT INTO Transfer_disposal (date,isotope_id,person_id,input_person_id,building_id,drum_id,activity,fully_decayed) VALUES (?,?,?,?,?,?,?,?)",undef,($date,$isotope_id,$user_id,$submitter_id,$building_id,$drum_id,$activity,$decayed_date)) or do {
     print_bug ("Error inserting new solid_waste record: ".$dbh->errstr());
     return;
   };
+
+  # If there was nothing in before then update the creation date.
+  unless ($existing_count) {
+      $dbh->do("UPDATE Drum SET date_started=? where drum_id=?",undef,($date,$drum_id)) or do {
+	  print_bug("Failed to update creation date on drum $drum_id: ".$dbh->errstr());
+	  return;
+      };
+  }
+
 
   my $template = HTML::Template->new(filename => 'admin_finish_solid.html');
 
